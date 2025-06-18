@@ -1,0 +1,35 @@
+{
+    "name": "Upwork Job Exporter",
+    "version": "2.0",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab",
+        "downloads",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/favicon-16x16.png",
+            "48": "icons/favicon-32x32.png",
+            "192": "icons/android-chrome-192x192.png",
+            "512": "icons/android-chrome-512x512.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.upwork.com/nx/search/jobs/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "host_permissions": [
+        "https://www.upwork.com/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}
