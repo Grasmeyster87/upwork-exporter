@@ -83,7 +83,14 @@ app.post('/api/jobs/firebase', async (req, res) => {
 
       console.log("➡️ Додаю документ до Firebase:", doc);
 
-      await col.add(doc);
+      // const added = await col.add(doc);
+      // console.log("✅ Додано до Firebase з ID:", added.id);
+
+      const safeId = job.title.slice(0, 100).replace(/[.#$/\[\]]+/g, "_"); // очищаємо title для ID
+
+      await col.doc(safeId).set(doc);
+
+      console.log("✅ Додано документ з ID:", safeId);
     }
 
     res.status(200).json({ message: 'Jobs saved to Firebase' });

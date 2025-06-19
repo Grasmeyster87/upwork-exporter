@@ -3,6 +3,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'process') {
         const { format, jobs } = message;
 
+        if (format === 'save-firebase') {
+            fetch('http://localhost:3003/api/jobs/firebase', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jobs)
+            })
+                .then(res => res.ok
+                    ? sendResponse({ success: true, message: '✅ Jobs saved to database' })
+                    : sendResponse({ success: false, message: '❌ Server error' }))
+                .catch(err => sendResponse({ success: false, message: err.message }));
+
+            return true; // <---- ВАЖЛИВО!
+        }
+
         if (format === 'save-db') {
             fetch('http://localhost:3003/api/jobs', {
                 method: 'POST',
