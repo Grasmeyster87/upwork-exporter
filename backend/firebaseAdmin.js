@@ -9,9 +9,9 @@
 // module.exports = { db };
 
 
-const admin = require('firebase-admin');
 require('dotenv').config();
-
+const admin = require('firebase-admin');
+// console.log("✅ FIREBASE_PRIVATE_KEY:", process.env.FIREBASE_PRIVATE_KEY);
 const serviceAccount = {
   type: process.env.FIREBASE_TYPE,
   project_id: process.env.FIREBASE_PROJECT_ID,

@@ -1,6 +1,7 @@
 // cd upwork-job-exporter/backend
 // npm init -y
 // npm install express sqlite3 cors sqlite dotenv firebase-admin
+// npm install node-windows - для создания виндовс инсталятора
 const express = require('express');
 const sqlite3 = require('sqlite3');
 const { open } = require('sqlite');
