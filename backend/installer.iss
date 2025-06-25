@@ -9,7 +9,7 @@ Compression=lzma
 SolidCompression=yes
 
 [Files]
-Source: "*"; DestDir: "{app}\backend"; Excludes: "node_modules .env firebaseKey*.json"; Flags: recursesubdirs
+Source: "*"; DestDir: "{app}\backend"; Excludes: "node_modules\* .env firebaseKey*.json"; Flags: recursesubdirs
 Source: "install-service.bat"; DestDir: "{app}\backend"
 Source: "uninstall-service.bat"; DestDir: "{app}\backend"
 
@@ -31,3 +31,9 @@ Name: "{group}\Uninstall"; Filename: "{uninstallexe}"
 
 [UninstallRun]
 Filename: "{app}\backend\uninstall-service.bat"; Flags: runhidden waituntilterminated
+
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}\backend\database"
+Type: filesandordirs; Name: "{app}\backend\daemon"
+Type: filesandordirs; Name: "{app}\backend\node_modules"
+

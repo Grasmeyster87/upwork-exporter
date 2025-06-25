@@ -1,7 +1,9 @@
 // uninstall-service.js
 const path = require('path');
+const fs = require('fs');
 const Service = require('node-windows').Service;
 //------------------------------------------------
+// 🧹 Додаткове очищення директорій
 const dirsToDelete = [
   path.join(__dirname, 'database'),
   path.join(__dirname, 'daemon'),
@@ -15,6 +17,7 @@ dirsToDelete.forEach(dir => {
   }
 });
 //---------------------------------------------------
+// 🧹 Видалення Windows-служби
 const svc = new Service({
     name: 'UpworkJobExporter',
     script: path.join(__dirname, 'server.js')
