@@ -1,0 +1,4 @@
+.env
+firebaseKey*.json
+firebaseKey2*.json
+node_modules/

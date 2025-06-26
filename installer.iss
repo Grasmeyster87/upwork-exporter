@@ -1,7 +1,7 @@
 [Setup]
 AppName=Upwork Back Service
-AppVersion=1.0
-DefaultDirName={pf}\UpworkBackService
+AppVersion=3.0
+DefaultDirName={autopf}\UpworkBackService
 DisableProgramGroupPage=yes
 OutputDir=.
 OutputBaseFilename=upwork-installer
@@ -9,31 +9,25 @@ Compression=lzma
 SolidCompression=yes
 
 [Files]
-Source: "*"; DestDir: "{app}\backend"; Excludes: "node_modules\* .env firebaseKey*.json"; Flags: recursesubdirs
-Source: "install-service.bat"; DestDir: "{app}\backend"
-Source: "uninstall-service.bat"; DestDir: "{app}\backend"
+Source: "backendcopyforinstall\*"; DestDir: "{app}\backend"; Flags: recursesubdirs createallsubdirs
+
+; Окремо додаємо необхідні файли .bat, якщо вони були пропущені
+Source: "backendcopyforinstall\install-service.bat"; DestDir: "{app}\backend"; Flags: ignoreversion
+Source: "backendcopyforinstall\uninstall-service.bat"; DestDir: "{app}\backend"; Flags: ignoreversion
 
 
 [Run]
-; 1. Перевірка/очищення кешу
 Filename: "{cmd}"; Parameters: "/c npm cache verify"; WorkingDir: "{app}\backend"; Flags: runhidden waituntilterminated
-
-; 2. Встановлення залежностей
 Filename: "{cmd}"; Parameters: "/c npm install"; WorkingDir: "{app}\backend"; Flags: runhidden waituntilterminated
-
-; 3. Реєстрація сервісу (наприклад, через node-windows або NSSM)
 Filename: "{app}\backend\install-service.bat"; Flags: runhidden
-
 
 [Icons]
 Name: "{group}\Uninstall"; Filename: "{uninstallexe}"
 
-
 [UninstallRun]
-Filename: "{app}\backend\uninstall-service.bat"; Flags: runhidden waituntilterminated
+Filename: "{app}\backend\uninstall-service.bat"; RunOnceId: "UninstallBackend"; Flags: runhidden waituntilterminated
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\backend\database"
 Type: filesandordirs; Name: "{app}\backend\daemon"
 Type: filesandordirs; Name: "{app}\backend\node_modules"
-
