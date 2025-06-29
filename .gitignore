@@ -5,3 +5,5 @@ firebaseKey.json
 **/.env*
 **/*.json
 **/jobs.db
+.obsidian/
+node_installer/
