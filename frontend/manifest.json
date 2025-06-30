@@ -5,7 +5,8 @@
     "permissions": [
         "activeTab",
         "downloads",
-        "scripting"
+        "scripting",
+        "tabs"
     ],
     "action": {
         "default_popup": "popup.html",
@@ -16,18 +17,10 @@
             "512": "icons/android-chrome-512x512.png"
         }
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "https://www.upwork.com/nx/search/jobs/*"
-            ],
-            "js": [
-                "content.js"
-            ]
-        }
-    ],
+   
     "host_permissions": [
-        "https://www.upwork.com/*"
+        "https://www.upwork.com/*",
+        "http://localhost:3003/*"
     ],
     "background": {
         "service_worker": "background.js"
